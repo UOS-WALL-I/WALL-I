@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://minchoi:!chl153249@cluster0.gwhle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+logging.level:
+  org.hibernate.SQL: debug
+    #  org.hibernate.type: trace
