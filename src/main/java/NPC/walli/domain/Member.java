@@ -22,5 +22,13 @@ public class Member {
 
     private String name;
 
+    private String password;
+
+    private String repeatPassword;
+
+    private String email;
+
+    private String phoneNumber;
+
     private List<String> subjectList = new ArrayList<String>();
 }

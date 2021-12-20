@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,18 +26,6 @@ public class MemberController {
 
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
-
-//    @GetMapping("/members/new")
-//    public Member create(@RequestParam("name") String name) {
-//        Member member = new Member();
-//
-//        member.setId(sequenceGeneratorService.getSequenceNumber(Member.SEQUENCE_NAME));
-//        member.setName(name);
-//
-//        memberRepository.save(member);
-//
-//        return member;
-//    }
 
     @GetMapping("/members/new")
     public String createForm(Model model) {
@@ -55,6 +42,10 @@ public class MemberController {
 
         member.setId(sequenceGeneratorService.getSequenceNumber(Member.SEQUENCE_NAME));
         member.setName(form.getName());
+        member.setPassword(form.getPassword());
+        member.setRepeatPassword(form.getRepeatPassword());
+        member.setEmail(form.getEmail());
+        member.setPhoneNumber(form.getPhoneNumber());
 
         memberRepository.save(member);
         return "redirect:/";
