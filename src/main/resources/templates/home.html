@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">강의자료</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>강의영상</li>
+                    <li>학습자료</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Click</button>
+            </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">도서관 자료</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>논문은 못하고 책정도..?</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Click</button>
+            </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">외부 자료</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>아</li>
+                    <li>무</li>
+                    <li>거</li>
+                    <li>나</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Click</button>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+
+</html>

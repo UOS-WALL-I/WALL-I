@@ -7,16 +7,18 @@ import NPC.walli.repository.SubjectRepository;
 import NPC.walli.service.SequenceGeneratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class MemberController {
     @Autowired
     private MemberRepository memberRepository;
@@ -26,16 +28,36 @@ public class MemberController {
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
 
+//    @GetMapping("/members/new")
+//    public Member create(@RequestParam("name") String name) {
+//        Member member = new Member();
+//
+//        member.setId(sequenceGeneratorService.getSequenceNumber(Member.SEQUENCE_NAME));
+//        member.setName(name);
+//
+//        memberRepository.save(member);
+//
+//        return member;
+//    }
+
     @GetMapping("/members/new")
-    public Member create(@RequestParam("name") String name) {
+    public String createForm(Model model) {
+        model.addAttribute("memberForm", new MemberForm());
+        return "/members/signUp";
+    }
+
+    @PostMapping("/members/new")
+    public String create(@Valid MemberForm form, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/members/signUp";
+        }
         Member member = new Member();
 
         member.setId(sequenceGeneratorService.getSequenceNumber(Member.SEQUENCE_NAME));
-        member.setName(name);
+        member.setName(form.getName());
 
         memberRepository.save(member);
-
-        return member;
+        return "redirect:/";
     }
 
     @GetMapping("/members")
