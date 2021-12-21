@@ -51,6 +51,11 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @RequestMapping("/members/login")
+    public String login() {
+        return "/members/signIn";
+    }
+
     @GetMapping("/members")
     public List<Member> findAll() {
         return memberRepository.findAll();
