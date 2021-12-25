@@ -3,22 +3,26 @@ package NPC.walli.controller;
 import NPC.walli.domain.Subject;
 import NPC.walli.repository.SubjectRepository;
 import NPC.walli.service.SequenceGeneratorService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Component
 @RequiredArgsConstructor
 @RestController
+@Getter
 public class SubjectController {
-    @Autowired
-    private SubjectRepository subjectRepository;
+//    @Autowired
+    private final SubjectRepository subjectRepository;
 
-    @Autowired
-    private SequenceGeneratorService sequenceGeneratorService;
+//    @Autowired
+    private final SequenceGeneratorService sequenceGeneratorService;
 
     @GetMapping("/subjects/new")
     public Subject create(@RequestParam("name") String name) {

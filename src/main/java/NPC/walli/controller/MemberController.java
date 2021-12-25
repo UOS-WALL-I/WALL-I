@@ -5,6 +5,7 @@ import NPC.walli.domain.Subject;
 import NPC.walli.repository.MemberRepository;
 import NPC.walli.repository.SubjectRepository;
 import NPC.walli.service.SequenceGeneratorService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,16 +17,15 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Controller
 public class MemberController {
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private SubjectRepository subjectRepository;
 
-    @Autowired
-    private SequenceGeneratorService sequenceGeneratorService;
+    private final MemberRepository memberRepository;
+
+    private final SubjectRepository subjectRepository;
+
+    private final SequenceGeneratorService sequenceGeneratorService;
 
     @GetMapping("/members/new")
     public String createForm(Model model) {
@@ -42,6 +42,7 @@ public class MemberController {
 
         member.setId(sequenceGeneratorService.getSequenceNumber(Member.SEQUENCE_NAME));
         member.setName(form.getName());
+        member.setLoginId(form.getLoginId());
         member.setPassword(form.getPassword());
         member.setRepeatPassword(form.getRepeatPassword());
         member.setEmail(form.getEmail());
@@ -49,11 +50,6 @@ public class MemberController {
 
         memberRepository.save(member);
         return "redirect:/";
-    }
-
-    @RequestMapping("/members/login")
-    public String login() {
-        return "/members/signIn";
     }
 
     @GetMapping("/members")

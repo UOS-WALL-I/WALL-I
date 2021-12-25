@@ -22,6 +22,8 @@ public class Member {
 
     private String name;
 
+    private String loginId;
+
     private String password;
 
     private String repeatPassword;

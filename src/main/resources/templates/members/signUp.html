@@ -3,7 +3,7 @@
 
 <head th:replace="fragments/header :: header" />
 <body>
-<!--form role="form" action="/members/new" th:object="${memberForm}" method="post"-->
+
 <div class="container">
   <div class="py-5 text-center">
     <h2>Checkout form</h2>
@@ -20,6 +20,14 @@
           <input type="text" th:field="*{name}" class="form-control" placeholder="Write your name." value="" required>
           <div class="invalid-feedback">
             Valid first name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label th:for="loginId">Id</label>
+          <input type="text" th:field="*{loginId}" class="form-control" placeholder="Write your Id." value="" required>
+          <div class="invalid-feedback">
+            Id is required.
           </div>
         </div>
 
