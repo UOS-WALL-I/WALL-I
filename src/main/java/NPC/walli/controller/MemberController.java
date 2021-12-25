@@ -1,29 +1,21 @@
 package NPC.walli.controller;
 
 import NPC.walli.domain.Member;
-import NPC.walli.domain.Subject;
-import NPC.walli.repository.MemberRepository;
-import NPC.walli.repository.SubjectRepository;
+import NPC.walli.service.MemberService;
 import NPC.walli.service.SequenceGeneratorService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @Controller
 public class MemberController {
 
-    private final MemberRepository memberRepository;
-
-    private final SubjectRepository subjectRepository;
+    private final MemberService memberService;
 
     private final SequenceGeneratorService sequenceGeneratorService;
 
@@ -48,37 +40,7 @@ public class MemberController {
         member.setEmail(form.getEmail());
         member.setPhoneNumber(form.getPhoneNumber());
 
-        memberRepository.save(member);
-        return "redirect:/";
+        memberService.join(member);
+        return "login";
     }
-
-    @GetMapping("/members")
-    @ResponseBody
-    public List<Member> findAll() {
-        return memberRepository.findAll();
-    }
-
-    @GetMapping("/members/subject")
-    public String addSubject(@RequestParam("name") String name, @RequestParam("subject") String subject) {
-        Member member = memberRepository.findOne(name);
-        member.getSubjectList().add(subject);
-
-        memberRepository.save(member);
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/members/subjects")
-    public List<Subject> findSubjectAll(@RequestParam("name") String name) {
-        Member member = memberRepository.findOne(name);
-        List<Subject> subjects = new ArrayList<>();
-        List<String> memberSubjects = member.getSubjectList();
-
-        for (String s : memberSubjects) {
-            subjects.add(subjectRepository.findOne(s));
-        }
-
-        return subjects;
-    }
-
 }
