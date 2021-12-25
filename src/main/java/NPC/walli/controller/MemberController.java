@@ -4,6 +4,7 @@ import NPC.walli.domain.Member;
 import NPC.walli.domain.Subject;
 import NPC.walli.repository.MemberRepository;
 import NPC.walli.repository.SubjectRepository;
+import NPC.walli.service.MemberService;
 import NPC.walli.service.SequenceGeneratorService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.List;
 @Controller
 public class MemberController {
 
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     private final SubjectRepository subjectRepository;
 
@@ -48,28 +49,23 @@ public class MemberController {
         member.setEmail(form.getEmail());
         member.setPhoneNumber(form.getPhoneNumber());
 
-        memberRepository.save(member);
+        memberService.join(member);
         return "redirect:/";
-    }
-
-    @GetMapping("/members")
-    public List<Member> findAll() {
-        return memberRepository.findAll();
     }
 
     @GetMapping("/members/subject")
     public String addSubject(@RequestParam("name") String name, @RequestParam("subject") String subject) {
-        Member member = memberRepository.findOne(name);
+        Member member = memberService.findByName(name);
         member.getSubjectList().add(subject);
 
-        memberRepository.save(member);
+        memberService.join(member);
 
         return "redirect:/";
     }
 
     @GetMapping("/members/subjects")
     public List<Subject> findSubjectAll(@RequestParam("name") String name) {
-        Member member = memberRepository.findOne(name);
+        Member member = memberService.findByName(name);
         List<Subject> subjects = new ArrayList<>();
         List<String> memberSubjects = member.getSubjectList();
 
@@ -80,4 +76,9 @@ public class MemberController {
         return subjects;
     }
 
+    @GetMapping("/member")
+    @ResponseBody
+    public Member findOne(@RequestParam("id") Long id) {
+        return memberService.findOne(id);
+    }
 }
