@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -33,19 +31,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    @ResponseBody
     public String login(@Valid LoginForm loginForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "members/signIn";
         }
-        log.info(loginForm.getLoginId().toString());
 
-//        Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
-//
-//        if (loginMember == null) {
-//            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
-//            return "members/signIn";
-//        }
+        Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+
+        if (loginMember == null) {
+            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
+            return "members/signIn";
+        }
         return "redirect:/";
     }
 }

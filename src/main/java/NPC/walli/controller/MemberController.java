@@ -53,6 +53,7 @@ public class MemberController {
     }
 
     @GetMapping("/members")
+    @ResponseBody
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
