@@ -14,7 +14,7 @@
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">User Information</h4>
 
-      <form class="needs-validation" role="form" action="/members/new" th:object="${memberForm}" method="post" novalidate>
+      <form class="needs-validation" role="form" action="/members/new" th:object="${memberForm}" method="post">
         <div class="mb-3">
           <label th:for="name">Name</label>
           <input type="text" th:field="*{name}" class="form-control" placeholder="Write your name." value="" required>
@@ -32,11 +32,12 @@
         </div>
 
         <div class="mb-3">
-          <label th:for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" th:field="*{email}" class="form-control" placeholder="you@example.com">
+          <label th:for="email">Email</label>
+          <input type="email" th:field="*{email}" class="form-control" placeholder="you@uos.ac.kr">
           <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
+            Please enter a valid email address.
           </div>
+          <button class="btn btn-primary" type="submit">Mail check</button>
         </div>
 
         <div class="mb-3">

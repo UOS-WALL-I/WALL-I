@@ -33,15 +33,11 @@ public class MemberService {
     /**
      * 회원 조회
      */
-    public Member findOne(Long id) {
-        return memberRepository.findOne(id);
-    }
-
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
 
-    public Member findByName(String name) {
+    public List<Member> findByName(String name) {
         return memberRepository.findByName(name);
     }
 }

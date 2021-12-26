@@ -7,15 +7,12 @@ import NPC.walli.repository.SubjectRepository;
 import NPC.walli.service.MemberService;
 import NPC.walli.service.SequenceGeneratorService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -53,32 +50,9 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/members/subject")
-    public String addSubject(@RequestParam("name") String name, @RequestParam("subject") String subject) {
-        Member member = memberService.findByName(name);
-        member.getSubjectList().add(subject);
-
-        memberService.join(member);
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/members/subjects")
-    public List<Subject> findSubjectAll(@RequestParam("name") String name) {
-        Member member = memberService.findByName(name);
-        List<Subject> subjects = new ArrayList<>();
-        List<String> memberSubjects = member.getSubjectList();
-
-        for (String s : memberSubjects) {
-            subjects.add(subjectRepository.findOne(s));
-        }
-
-        return subjects;
-    }
-
-    @GetMapping("/member")
+    @GetMapping("/members")
     @ResponseBody
-    public Member findOne(@RequestParam("id") Long id) {
-        return memberService.findOne(id);
+    public List<Member> findByName(@RequestParam("name") String name) {
+        return memberService.findByName(name);
     }
 }

@@ -38,14 +38,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "members/signIn";
         }
-        log.info(loginForm.getLoginId().toString());
 
-//        Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
-//
-//        if (loginMember == null) {
-//            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
-//            return "members/signIn";
-//        }
         return "redirect:/";
     }
 }
