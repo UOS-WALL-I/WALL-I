@@ -43,7 +43,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        return "loginHome";
+        return "/home";
     }
 
     @PostMapping("/logout")
@@ -56,4 +56,10 @@ public class LoginController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/search")
+    public String search() {
+        return "/search";
+    }
+
 }

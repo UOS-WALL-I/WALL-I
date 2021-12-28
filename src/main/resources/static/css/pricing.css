@@ -59,8 +59,11 @@ html {
 }
 .form-signIn input[type="password"] {
   margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 .lh-condensed { line-height: 1.25; }
+
+.login-input {
+  margin: 0.5rem 0rem;
+  border-radius: 1rem;
+}
