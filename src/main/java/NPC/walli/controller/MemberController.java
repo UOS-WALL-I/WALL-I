@@ -41,6 +41,6 @@ public class MemberController {
         member.setPhoneNumber(form.getPhoneNumber());
 
         memberService.join(member);
-        return "login";
+        return "redirect:/";
     }
 }

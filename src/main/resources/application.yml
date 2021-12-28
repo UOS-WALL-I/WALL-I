@@ -4,7 +4,7 @@ spring:
     suffix: .html
   data:
     mongodb:
-      uri: mongodb+srv://minchoi:!chl153249@cluster0.gwhle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      uri: mongodb+srv://admin:gudtlr731~!@hynam.peleb.mongodb.net/WallIDB?retryWrites=true&w=majority
 
   jpa:
     hibernate:
