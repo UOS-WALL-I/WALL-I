@@ -22,18 +22,19 @@
                 <button type="button" class="btn btn-lg btn-block btn-outline-primary">Click</button>
             </div>
         </div>
+
+<!--        도서관 파트-->
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">도서관 자료</h4>
             </div>
             <div class="card-body">
                 <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>논문은 못하고 책정도..?</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Click</button>
+                <input id="search-word" type="text" th:class="form-control" th:accept-charset="utf-8" />
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="searchLibrary()">Click</button>
             </div>
         </div>
+
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">외부 자료</h4>
@@ -53,5 +54,13 @@
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>
+
+<script type="text/javascript">
+    function searchLibrary() {
+        let word = document.getElementById('search-word').value;
+        let url = 'http://library.uos.ac.kr/searchTotal/result?st=KWRD&si=TOTAL&service_type=brief&q=' + word + '&x=0&y=0';
+        window.open(url);
+    }
+</script>
 
 </html>
