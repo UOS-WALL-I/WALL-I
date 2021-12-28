@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
+
 @AllArgsConstructor
 @Controller
 public class MemberController {
@@ -43,4 +46,11 @@ public class MemberController {
         memberService.join(member);
         return "redirect:/";
     }
+
+    @GetMapping("/members")
+    @ResponseBody
+    public List<Member> findByName(@RequestParam("name") String name) {
+        return memberService.findByName(name);
+    }
+
 }

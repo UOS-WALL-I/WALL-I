@@ -32,11 +32,12 @@
         </div>
 
         <div class="mb-3">
-          <label th:for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" th:field="*{email}" class="form-control" placeholder="you@example.com">
+          <label th:for="email">Email</label>
+          <input type="email" th:field="*{email}" class="form-control" placeholder="you@uos.ac.kr">
           <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
+            Please enter a valid email address.
           </div>
+          <button class="btn btn-primary" type="submit">Mail check</button>
         </div>
 
         <div class="mb-3">

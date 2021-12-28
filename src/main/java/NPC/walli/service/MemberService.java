@@ -37,4 +37,7 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    public List<Member> findByName(String name) {
+        return memberRepository.findByName(name);
+    }
 }
