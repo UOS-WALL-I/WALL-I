@@ -3,53 +3,47 @@
 
 <head th:replace="fragments/header :: header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- Custom styles for this template -->
-    <link href="/css/pricing.css" rel="stylesheet">
 </head>
 
-<body class="">
+<body class="bg-dark text-white">
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 shadow-sm">
+        <div class="card mb-4 shadow-sm" style="background-color: #6c757d">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">강의자료</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+                <h1 class="card-title pricing-card-title">$0</h1>
                 <ul class="list-unstyled mt-3 mb-4">
                     <li>강의영상</li>
                     <li>학습자료</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Click</button>
+                <button type="button" class="text-white border-white btn btn-lg btn-block btn-outline-primary">Click</button>
             </div>
         </div>
 
-<!--        도서관 파트-->
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">도서관 자료</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
-                <input id="search-word" type="text" th:class="form-control" th:accept-charset="utf-8" />
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="searchLibrary()">Click</button>
-            </div>
-        </div>
-
-        <div class="card mb-4 shadow-sm">
+        <div class="card mb-4 shadow-sm bg-dark">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">외부 자료</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+                <h1 class="card-title pricing-card-title">$29</h1>
                 <ul class="list-unstyled mt-3 mb-4">
                     <li>아</li>
                     <li>무</li>
                     <li>거</li>
                     <li>나</li>
+                    <li>아</li>
+                    <li>무</li>
+                    <li>거</li>
+                    <li>나</li>
+                    <li>아</li>
+                    <li>무</li>
+                    <li>거</li>
+                    <li>나</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Click</button>
+                <button type="button" class="text-white border-white btn btn-lg btn-block btn-outline-primary">Click</button>
             </div>
         </div>
     </div>
@@ -63,6 +57,12 @@
         let url = 'http://library.uos.ac.kr/searchTotal/result?st=KWRD&si=TOTAL&service_type=brief&q=' + word + '&x=0&y=0';
         window.open(url);
     }
+
+    let url = document.location.href;
+    let word = document.getElementById('search-word').value;
+    console.log(word);
+    console.log(url);
+
 </script>
 
 </html>

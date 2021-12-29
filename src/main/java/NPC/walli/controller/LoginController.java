@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,14 +31,14 @@ public class LoginController {
     @PostMapping("/")
     public String login(@Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "login";
+            return "/login";
         }
 
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
 
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
-            return "login";
+            return "/login";
         }
 
         HttpSession session = request.getSession();
@@ -58,7 +59,8 @@ public class LoginController {
     }
 
     @GetMapping("/search")
-    public String search() {
+    public String search(@RequestParam(value = "word") String word) {
+        System.out.println(word);
         return "/search";
     }
 

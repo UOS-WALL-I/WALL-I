@@ -44,8 +44,8 @@
           </svg>
         </div>
 
-        <form name="test">
-          <input class="home-search" type="text" placeholder="WALL-I 검색" onkeyup="pressEnter(event)" autofocus/>
+        <form name="test" action="/search" method="get">
+          <input name="word" class="home-search" type="text" placeholder="WALL-I 검색" th:accept-charset="utf-8" autofocus/>
         </form>
 
         <!--
@@ -61,15 +61,10 @@
     </div>
   </body>
 <script type="text/javascript">
-  function goSearch() {
-      document.test.action = '/search';
-      document.test.method = 'get';
-      document.test.submit();
-  }
   function pressEnter(e) {
-    if (e.keyCode == 13) {
-        goSearch();
-    }
+      if (e.keyCode === 13) {
+          // document.test.submit();
+      }
   }
 </script>
 </html>
