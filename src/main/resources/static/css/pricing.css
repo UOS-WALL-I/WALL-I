@@ -67,3 +67,11 @@ html {
   margin: 0.5rem 0rem;
   border-radius: 1rem;
 }
+
+.search-input {
+  border-radius: 1rem;
+  width: 32rem;
+  height: 2.25rem;
+  padding-left: 1rem;
+  margin-left: 2rem;
+}
