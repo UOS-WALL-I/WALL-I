@@ -5,7 +5,7 @@
 
 <body class="body-signIn bg-dark text-white">
   <div class="container">
-    <form class="form-signIn" action="/" role="form" th:object="${loginForm}" method="post">
+    <form class="form-signIn" name="login" action="/" role="form" th:object="${loginForm}" method="post">
       <h1 class="h3 mb-3 font-weight-normal">WALL-I</h1>
       <div th:if="${#fields.hasGlobalErrors()}">
         <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
@@ -29,10 +29,17 @@
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <button class="btn btn-lg btn-primary btn-block" onkeyup="pressEnter(event)" type="submit">Sign in</button>
       <a class="btn btn-lg btn-primary btn-block" href="/members/new">Sign up</a>
     </form>
   </div>
 </body>
+<script type="text/javascript">
+    function pressEnter(e) {
+        if (e.keyCode === 13) {
+            document.login.submit();
+        }
+    }
+</script>
 
 </html>

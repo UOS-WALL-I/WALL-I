@@ -59,9 +59,9 @@
     }
 
     let url = document.location.href;
-    let word = document.getElementById('search-word').value;
+    let word = url.substring(url.indexOf('=') + 1, url.length);
     console.log(word);
-    console.log(url);
+    document.getElementById('search-word').value = decodeURIComponent(word);
 
 </script>
 

@@ -60,7 +60,6 @@ public class LoginController {
 
     @GetMapping("/search")
     public String search(@RequestParam(value = "word") String word) {
-        System.out.println(word);
         return "/search";
     }
 
