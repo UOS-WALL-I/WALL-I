@@ -18,6 +18,9 @@ spring:
             enable: true
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
+        smtps:
+          checkserveridentity: true
+        debug: true
 
   jpa:
     hibernate:

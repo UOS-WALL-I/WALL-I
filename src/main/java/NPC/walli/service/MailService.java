@@ -4,6 +4,7 @@ import NPC.walli.controller.MemberForm;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
@@ -15,18 +16,9 @@ import java.util.Random;
 @AllArgsConstructor
 public class MailService {
     private JavaMailSender mailSender;
-    private static final String FROM_ADDRESS = "asdf6256@gmail.com";
+    private static final String FROM_ADDRESS = "330510@naver.com";
 
-    public static final String ePw = createKey();
-
-    private MimeMessage createMessage(String to) throws Exception {
-        System.out.println("보내는 대상 : "+ to);
-        System.out.println("인증 번호 : "+ePw);
-        MimeMessage  message = mailSender.createMimeMessage();
-
-        message.addRecipients(Message.RecipientType.TO, to);//보내는 대상
-        message.setSubject("WALL-I 인증번호가 도착했습니다.");//제목
-
+    public void sendMessage(String to, String code) throws Exception {
         String msgg="";
         msgg+= "<div style='margin:100px;'>";
         msgg+= "<h1> 안녕하세요  WALL-I 입니다!!! </h1>";
@@ -39,16 +31,20 @@ public class MailService {
         msgg+= "<h3 style='color:blue;'>회원가입 코드입니다.</h3>";
         msgg+= "<div style='font-size:130%'>";
         msgg+= "CODE : <strong>";
-        msgg+= ePw+"</strong><div><br/> ";
+        msgg+= code+"</strong><div><br/> ";
         msgg+= "</div>";
-        message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress(FROM_ADDRESS,"WALL-I"));//보내는 사람
 
-        return message;
+        MimeMessage  message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+        helper.setFrom(FROM_ADDRESS);
+        helper.setTo(to);
+        helper.setSubject("WALL-I 인증번호가 도착했습니다.");
+        helper.setText(msgg, true);
+        mailSender.send(message);
     }
 
 //    인증코드 만들기
-    public static String createKey() {
+    public String createKey() {
         StringBuffer key = new StringBuffer();
         Random rnd = new Random();
 
@@ -71,22 +67,5 @@ public class MailService {
             }
         }
         return key.toString();
-    }
-
-    public void mailSend(MemberForm form) throws Exception {
-
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setTo(mailDto.getAddress());
-//        message.setFrom(MailService.FROM_ADDRESS);
-//        message.setSubject(mailDto.getTitle());
-//        message.setText(mailDto.getMessage());
-
-        MimeMessage message = createMessage(form.getEmail());
-        try {
-            mailSender.send(message);
-        } catch (MailException es) {
-            es.printStackTrace();
-            throw new IllegalArgumentException();
-        }
     }
 }

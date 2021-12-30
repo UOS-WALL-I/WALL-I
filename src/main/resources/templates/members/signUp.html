@@ -25,23 +25,30 @@
         </div>
 
         <div class="mb-3">
-          <label th:for="email">Id</label>
-          <div class="input-group">
-            <input type="email" th:field="*{email}" class="form-control input-email" placeholder="you@uos.ac.kr">
-            <button class="btn btn-primary check-button" type="button" disabled>Send</button>
+          <div>
+            <label th:for="email">Id</label>
+            <div class="input-group">
+              <input type="email" th:field="*{email}" class="form-control input-email" placeholder="you@uos.ac.kr">
+              <button class="btn btn-primary check-email" type="button" disabled>Send</button>
+            </div>
           </div>
           <span class="check-mail-re"></span>
+          <div class="input-group">
+            <input type="text" class="form-control input-code" disabled>
+            <button class="btn btn-primary check-code" type="button" disabled>인증</button>
+          </div>
+          <span class="check-code-re"></span>
         </div>
 
         <div class="mb-3">
           <label th:for="password">Password</label>
-          <input type="text" th:field="*{password}" class="form-control" placeholder="1~0/a~z/A~Z, 8~20 words" required>
+          <input type="password" th:field="*{password}" class="form-control input-pwd" placeholder="1~0/a~z/A~Z, 8~20 words" required>
           <span class="check-password-re"></span>
         </div>
 
         <div class="mb-3">
           <label th:for="repeatPassword">Re-enter Password </label>
-          <input type="text" th:field="*{repeatPassword}" class="form-control" placeholder="">
+          <input type="password" th:field="*{repeatPassword}" class="form-control input-rpwd" placeholder="">
           <span class="check-repeat-re"></span>
         </div>
 
@@ -52,7 +59,7 @@
 
         <hr class="mb-4">
 
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to sign up</button>
+        <button class="btn btn-primary btn-lg btn-block" id="signUp-button" type="submit">Continue to sign up</button>
       </form>
     </div>
   </div>
@@ -72,6 +79,7 @@
   let idCheck = false;
   let codeCheck = false;
   let passwordCheck = false;
+  let repeatCheck = false;
 
   $('.input-email').on("propertychange change keyup paste input", function (){
     let email = $('.input-email').val();
@@ -85,6 +93,7 @@
         if (result == "success") {
           $('.check-mail-re').text("사용 가능한 아이디 입니다.");
           $('.check-mail-re').css("color", "green");
+          $('.check-email').attr("disabled", false);
           idCheck = true;
         } else {
           $('.check-mail-re').text("중복된 아이디 입니다.");
@@ -93,6 +102,64 @@
       }
     });
   });
+
+  $('.check-email').click(function () {
+    let email = $('.input-email').val();
+
+    $.ajax({
+      type : "GET",
+      url : "/members/codeCheck?email=" + email,
+      success: function (data) {
+        $('.input-code').attr("disabled", false);
+        $('.check-code').attr("disabled", false);
+        code = data;
+      }
+    });
+  });
+
+  $('.check-code').click(function () {
+    let inputCode = $('.input-code').val();
+    if (inputCode == code) {
+      $('.check-code-re').text("인증번호가 일치합니다.");
+      $('.check-code-re').css("color", "green");
+      $('.check-code').css("display", "none");
+      codeCheck = true;
+    } else {
+      $('.check-code-re').text("인증번호가 일치하지 않습니다.");
+      $('.check-code-re').css("color", "red");
+    }
+  });
+
+  $('.input-pwd').blur(function () {
+    let pwd = $('.input-pwd').val();
+    if (pwd.length < 8 || pwd.length > 20) {
+      $('.check-password-re').text("비밀번호의 길이는 8글자 이상 20글자 이하여야 합니다.");
+      $('.check-password-re').css("color", "red");
+    } else {
+      $('.check-password-re').css("display", "none");
+      passwordCheck = true;
+    }
+  });
+
+  $('.input-rpwd').blur(function () {
+    let pwd = $('.input-pwd').val();
+    let rpwd = $('.input-rpwd').val();
+    if (pwd == rpwd) {
+      $('.check-repeat-re').text("비밀번호가 일치합니다.");
+      $('.check-repeat-re').css("color", "green");
+      repeatCheck = true;
+    } else {
+      $('.check-repeat-re').text("비밀번호가 같지 않습니다.");
+      $('.check-repeat-re').css("color", "red");
+    }
+  });
+
+  $('#signUp-button').click(function (){
+    if (!idCheck || !codeCheck || !passwordCheck || !repeatCheck) {
+      return false;
+    }
+  });
+
 </script>
 
 </body>
