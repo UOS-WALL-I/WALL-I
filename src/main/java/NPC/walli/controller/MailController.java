@@ -18,7 +18,7 @@ public class MailController {
     }
 
     @PostMapping("/mail")
-    public void execMail(Dto dto) throws Exception {
-        mailService.mailSend(dto);
+    public void execMail(MemberForm form) throws Exception {
+        mailService.mailSend(form);
     }
 }
