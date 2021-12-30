@@ -6,10 +6,10 @@ spring:
     mongodb:
       uri: mongodb+srv://minchoi:!chl153249@cluster0.gwhle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: "asdf6256@gmail.com"
-    password: "zikqpzlksdhhqhoj"
+    host: smtp.naver.com
+    port: 465
+    username: "330510@naver.com"
+    password: "Gudtlr731!@#"
     properties:
       mail:
         smtp:
