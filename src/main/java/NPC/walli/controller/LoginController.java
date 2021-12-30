@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -31,20 +32,25 @@ public class LoginController {
     @PostMapping("/")
     public String login(@Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "/login";
+            return "login";
         }
 
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
-
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
-            return "/login";
+            return "login";
         }
 
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        return "/home";
+        return "redirect:/home";
+    }
+
+    @GetMapping("/home")
+    public String home(HttpServletRequest request, HttpServletResponse response) {
+
+        return "home";
     }
 
     @PostMapping("/logout")
@@ -60,7 +66,7 @@ public class LoginController {
 
     @GetMapping("/search")
     public String search(@RequestParam(value = "word") String word) {
-        return "/search";
+        return "search";
     }
 
 }

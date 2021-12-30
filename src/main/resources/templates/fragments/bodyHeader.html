@@ -3,7 +3,7 @@
 
 <div class="header" th:fragment="bodyHeader">
   <div class="d-flex flex-md-row align-items-center p-3 px-md-4 mb-3 shadow-sm">
-    <h5 class="my-0 font-weight-normal" style="margin-right: 1rem">WALL-I</h5>
+    <h5 class="my-0 font-weight-normal" style="margin-right: 1rem" th:onclick="|location.href='@{/}'|">WALL-I</h5>
     <input id="search-word" type="text" class="search-input" th:accept-charset="utf-8" />
     <nav class="ms-auto my-2 my-md-0 mr-md-3">
       <!--        도서관 파트-->

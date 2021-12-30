@@ -1,5 +1,6 @@
 package NPC.walli.service;
 
+import NPC.walli.controller.MemberForm;
 import NPC.walli.domain.Dto;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.MailException;
@@ -75,7 +76,7 @@ public class MailService {
         return key.toString();
     }
 
-    public void mailSend(Dto mailDto) throws Exception {
+    public void mailSend(MemberForm form) throws Exception {
 
 //        SimpleMailMessage message = new SimpleMailMessage();
 //        message.setTo(mailDto.getAddress());
@@ -83,7 +84,7 @@ public class MailService {
 //        message.setSubject(mailDto.getTitle());
 //        message.setText(mailDto.getMessage());
 
-        MimeMessage message = createMessage(mailDto.getAddress());
+        MimeMessage message = createMessage(form.getEmail());
         try {
             mailSender.send(message);
         } catch (MailException es) {
