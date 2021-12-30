@@ -22,13 +22,9 @@ public class Member {
 
     private String name;
 
-    private String loginId;
+    private String email;
 
     private String password;
-
-    private String repeatPassword;
-
-    private String email;
 
     private String phoneNumber;
 

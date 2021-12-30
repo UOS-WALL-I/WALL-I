@@ -13,5 +13,5 @@ public interface MemberRepository extends MongoRepository<Member, Long> {
     List<Member> findByName(String name);
 
     //저장소에 Id가 없을수도 있으니 Optional사용
-    Optional<Member> findByLoginId(String loginId);
+    Optional<Member> findByEmail(String email);
 }

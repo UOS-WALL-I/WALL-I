@@ -1,12 +1,9 @@
 package NPC.walli.service;
 
 import NPC.walli.controller.MemberForm;
-import NPC.walli.domain.Dto;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;

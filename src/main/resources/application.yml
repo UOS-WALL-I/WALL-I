@@ -4,11 +4,11 @@ spring:
     suffix: .html
   data:
     mongodb:
-      uri: mongodb+srv://minchoi:!chl153249@cluster0.gwhle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      uri: mongodb+srv://hynam:gudtlr731@hynam.xjpol.mongodb.net/mydb?retryWrites=true&w=majority
   mail:
     host: smtp.naver.com
     port: 465
-    username: "330510@naver.com"
+    username: "330510"
     password: "Gudtlr731!@#"
     properties:
       mail:
@@ -16,6 +16,8 @@ spring:
           auth: true
           starttls:
             enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
 
   jpa:
     hibernate:

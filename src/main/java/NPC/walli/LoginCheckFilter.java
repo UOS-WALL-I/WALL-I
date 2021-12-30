@@ -19,7 +19,7 @@ import java.util.Enumeration;
 @Slf4j
 public class LoginCheckFilter implements Filter {
 
-    private static final String[] whitelist = {"/", "/members", "/logout", "/css/*", "/favicon.ico"};
+    private static final String[] whitelist = {"/", "/members", "/members/*", "/logout", "/css/*", "/favicon.ico"};
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -28,7 +28,7 @@ public class LoginCheckFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         try {
-            log.info("인층 체크 필터 시작 {}", requestURI);
+            log.info("인증 체크 필터 시작 {}", requestURI);
             HttpSession session = httpRequest.getSession(false);
             if (isLoginCheckPath(requestURI)) {
                 log.info("인증 체크 로직 실행 {}", requestURI);

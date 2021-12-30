@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/header :: header">
-  <script></script>
 </head>
 <body>
 
@@ -26,33 +25,24 @@
         </div>
 
         <div class="mb-3">
-          <label th:for="loginId">Id</label>
-          <input type="text" th:field="*{loginId}" class="form-control" placeholder="Write your Id." value="" required>
-          <div class="invalid-feedback">
-            Id is required.
+          <label th:for="email">Id</label>
+          <div class="input-group">
+            <input type="email" th:field="*{email}" class="form-control input-email" placeholder="you@uos.ac.kr">
+            <button class="btn btn-primary check-button" type="button" disabled>Send</button>
           </div>
-        </div>
-
-        <div class="mb-3">
-          <label th:for="email">Email</label>
-          <input type="email" th:field="*{email}" class="form-control" placeholder="you@uos.ac.kr">
-          <div class="invalid-feedback">
-            Please enter a valid email address.
-          </div>
-          <button class="btn btn-primary" type="submit" formaction="/mail">Mail check</button>
+          <span class="check-mail-re"></span>
         </div>
 
         <div class="mb-3">
           <label th:for="password">Password</label>
           <input type="text" th:field="*{password}" class="form-control" placeholder="1~0/a~z/A~Z, 8~20 words" required>
-          <div class="invalid-feedback">
-            Please enter your shipping address.
-          </div>
+          <span class="check-password-re"></span>
         </div>
 
         <div class="mb-3">
           <label th:for="repeatPassword">Re-enter Password </label>
           <input type="text" th:field="*{repeatPassword}" class="form-control" placeholder="">
+          <span class="check-repeat-re"></span>
         </div>
 
         <div class="mb-3">
@@ -76,6 +66,35 @@
     </ul>
   </footer>
 </div>
+
+<script>
+  let code = "";
+  let idCheck = false;
+  let codeCheck = false;
+  let passwordCheck = false;
+
+  $('.input-email').on("propertychange change keyup paste input", function (){
+    let email = $('.input-email').val();
+    let data = {email : email};
+
+    $.ajax({
+      type : "post",
+      url : "/members/emailCheck",
+      data : data,
+      success : function (result){
+        if (result == "success") {
+          $('.check-mail-re').text("사용 가능한 아이디 입니다.");
+          $('.check-mail-re').css("color", "green");
+          idCheck = true;
+        } else {
+          $('.check-mail-re').text("중복된 아이디 입니다.");
+          $('.check-mail-re').css("color", "red");
+        }
+      }
+    });
+  });
+</script>
+
 </body>
 
 </html>

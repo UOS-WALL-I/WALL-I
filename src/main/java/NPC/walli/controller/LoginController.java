@@ -35,7 +35,7 @@ public class LoginController {
             return "login";
         }
 
-        Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+        Member loginMember = loginService.login(loginForm.getEmail(), loginForm.getPassword());
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
             return "login";
@@ -55,8 +55,6 @@ public class LoginController {
 
     @GetMapping("/home")
     public String home(HttpServletRequest request, HttpServletResponse response) {
-
-
         return "home";
     }
 

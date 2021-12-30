@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -23,13 +24,6 @@ public class MemberService {
         return member.getId();
     }
 
-//    private void validateDuplicateMemberLoginId(Member member) {
-//        List<Member> findMembers = memberRepository.findAll();
-//        if (!findMembers.isEmpty()) {
-//            throw new IllegalStateException("이미 존재하는 회원입니다.");
-//        }
-//    }
-
     /**
      * 회원 조회
      */
@@ -39,5 +33,9 @@ public class MemberService {
 
     public List<Member> findByName(String name) {
         return memberRepository.findByName(name);
+    }
+
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email).orElse(null);
     }
 }
