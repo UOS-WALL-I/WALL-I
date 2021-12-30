@@ -23,6 +23,7 @@
                th:errorclass="field-error">
         <div class="field-error" th:errors="*{password}"/>
       </div>
+      <input id="redirectURL" th:field="*{redirectURL}" class="visually-hidden"/>
 
       <div class="checkbox mb-3">
         <label>
@@ -40,6 +41,9 @@
             document.login.submit();
         }
     }
+
+    document.getElementById("redirectURL").value = document.location.search;
+
 </script>
 
 </html>

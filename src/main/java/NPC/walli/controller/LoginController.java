@@ -24,7 +24,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/")
-    public String loginForm(Model model) {
+    public String loginForm(Model model, HttpServletRequest request) {
         model.addAttribute("loginForm", new LoginForm());
         return "login";
     }
@@ -44,11 +44,18 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
+        if (request.getParameter("redirectURL") != null) {
+            String redirectURL = request.getParameter("redirectURL")
+                    .substring(request.getParameter("redirectURL").indexOf('=') + 1);
+            return "redirect:" + redirectURL;
+        }
+
         return "redirect:/home";
     }
 
     @GetMapping("/home")
     public String home(HttpServletRequest request, HttpServletResponse response) {
+
 
         return "home";
     }

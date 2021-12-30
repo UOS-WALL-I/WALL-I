@@ -58,7 +58,7 @@
         window.open(url);
     }
 
-    let url = document.location.href;
+    let url = document.URL;
     let word = url.substring(url.indexOf('=') + 1, url.length);
     document.getElementById('search-word').value = decodeURIComponent(word);
 

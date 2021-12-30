@@ -12,11 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
 
 @Slf4j
 public class LoginCheckFilter implements Filter {
 
-    private static final String[] whitelist = {"/", "/members", "/logout", "/css/*"};
+    private static final String[] whitelist = {"/", "/members", "/logout", "/css/*", "/favicon.ico"};
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -33,6 +36,15 @@ public class LoginCheckFilter implements Filter {
                 if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
                     log.info("미인증 사용자 요청 {}", requestURI);
                     //로그인으로 리다이렉트
+
+                    //URI 에 파라미터 값 이어 붙이기 without '&'
+                    requestURI += "?";
+                    Enumeration<String> params = request.getParameterNames();
+                    while (params.hasMoreElements()) {
+                        String name = params.nextElement();
+                        requestURI += name + "=" + URLEncoder.encode(request.getParameter(name), StandardCharsets.UTF_8);
+                    }
+
                     httpResponse.sendRedirect("/?redirectURL=" + requestURI);
                     return;
                 }
