@@ -7,6 +7,7 @@ import NPC.walli.service.MemberService;
 import NPC.walli.service.SequenceGeneratorService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,8 @@ public class MemberController {
 
     private final SequenceGeneratorService sequenceGeneratorService;
 
+    PasswordEncoder passwordEncoder;
+
     @GetMapping("/members/new")
     public String createForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
@@ -44,7 +47,7 @@ public class MemberController {
         member.setId(sequenceGeneratorService.getSequenceNumber(Member.SEQUENCE_NAME));
         member.setEmail(form.getEmail());
         member.setName(form.getName());
-        member.setPassword(form.getPassword());
+        member.setPassword(passwordEncoder.encode(form.getPassword()));
         member.setPhoneNumber(form.getPhoneNumber());
 
         memberService.join(member);

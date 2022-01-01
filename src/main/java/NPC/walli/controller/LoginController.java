@@ -4,6 +4,7 @@ import NPC.walli.domain.Member;
 import NPC.walli.service.LoginService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,7 @@ public class LoginController {
         }
 
         Member loginMember = loginService.login(loginForm.getEmail(), loginForm.getPassword());
+
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
             return "login";
