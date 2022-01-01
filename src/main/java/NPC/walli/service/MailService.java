@@ -1,22 +1,18 @@
 package NPC.walli.service;
 
-import NPC.walli.controller.MemberForm;
 import lombok.AllArgsConstructor;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Random;
 
 @Service
 @AllArgsConstructor
 public class MailService {
-    private JavaMailSender mailSender;
-    private static final String FROM_ADDRESS = "330510@naver.com";
+    private final JavaMailSender mailSender;
+    private static final String FROM_ADDRESS = "skagudtlr731@gmail.com";
 
     public void sendMessage(String to, String code) throws Exception {
         String msgg="";

@@ -6,10 +6,10 @@ spring:
     mongodb:
       uri: mongodb+srv://hynam:gudtlr731@hynam.xjpol.mongodb.net/mydb?retryWrites=true&w=majority
   mail:
-    host: smtp.naver.com
-    port: 465
-    username: "330510"
-    password: "Gudtlr731!@#"
+    host: smtp.gmail.com
+    port: 587
+    username: "skagudtlr731@gmail.com"
+    password: "pesbkxtsilktqwoo"
     properties:
       mail:
         smtp:
@@ -17,9 +17,6 @@ spring:
           starttls:
             enable: true
           socketFactory:
-            class: javax.net.ssl.SSLSocketFactory
-        smtps:
-          checkserveridentity: true
         debug: true
 
   jpa:
