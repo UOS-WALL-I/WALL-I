@@ -71,6 +71,7 @@ public class LoginController {
 
     @GetMapping("/search")
     public String search(@RequestParam(value = "word") String word) {
+
         return "search";
     }
 
