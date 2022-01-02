@@ -3,6 +3,7 @@ package NPC.walli.service;
 import NPC.walli.domain.Member;
 import NPC.walli.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ public class MemberService {
      * 회원 가입
      */
     @Transactional
-    public Long join(Member member) {
+    public ObjectId join(Member member) {
         memberRepository.save(member);
         return member.getId();
     }

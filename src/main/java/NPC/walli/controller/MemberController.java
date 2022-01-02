@@ -1,10 +1,8 @@
 package NPC.walli.controller;
 
 import NPC.walli.domain.Member;
-import NPC.walli.repository.MemberRepository;
 import NPC.walli.service.MailService;
 import NPC.walli.service.MemberService;
-import NPC.walli.service.SequenceGeneratorService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @AllArgsConstructor
@@ -26,8 +23,6 @@ public class MemberController {
     private final MemberService memberService;
 
     private final MailService mailService;
-
-    private final SequenceGeneratorService sequenceGeneratorService;
 
     PasswordEncoder passwordEncoder;
 
@@ -44,7 +39,6 @@ public class MemberController {
         }
         Member member = new Member();
 
-        member.setId(sequenceGeneratorService.getSequenceNumber(Member.SEQUENCE_NAME));
         member.setEmail(form.getEmail());
         member.setName(form.getName());
         member.setPassword(passwordEncoder.encode(form.getPassword()));
