@@ -4,12 +4,17 @@ spring:
     suffix: .html
   data:
     mongodb:
-      uri: mongodb+srv://hynam:gudtlr731@hynam.xjpol.mongodb.net/mydb?retryWrites=true&w=majority
+      uri: mongodb+srv://minchoi:!chl153249@cluster0.gwhle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+  servlet:
+    multipart:
+      max-file-size: 256MB
+      max-request-size: 256MB
+      enabled: true
   mail:
     host: smtp.gmail.com
     port: 587
-    username: "skagudtlr731@gmail.com"
-    password: "pesbkxtsilktqwoo"
+    username: "asdf6256@gmail.com"
+    password: "cbzqlydgsfnqcjqp"
     properties:
       mail:
         smtp:

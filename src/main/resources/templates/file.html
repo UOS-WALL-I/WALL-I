@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <h1>View Photo</h1>
+  Title: <span th:text="${title}">name</span>
+  <img alt="sample" th:src="*{'data:.pdf;base64,'+image}" />
+  <iframe
+    src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&scrollbar=0"
+    frameBorder="0"
+    scrolling="auto"
+    height="100%"
+    width="100%"
+  ></iframe>
+</body>
+</html>
