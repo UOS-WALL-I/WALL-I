@@ -1,6 +1,7 @@
 package NPC.walli.controller;
 
 import NPC.walli.domain.Member;
+import NPC.walli.domain.Role;
 import NPC.walli.service.MailService;
 import NPC.walli.service.MemberService;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,7 @@ public class MemberController {
 
         member.setEmail(form.getEmail());
         member.setName(form.getName());
+        member.setRole(Role.Student);
         member.setPassword(passwordEncoder.encode(form.getPassword()));
         member.setPhoneNumber(form.getPhoneNumber());
 

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="header h-mb" th:fragment="homeHeader">
+  <div class="d-flex flex-md-row align-items-center p-3 px-md-4 mb-3 shadow-sm h-flex">
+    <h5 class="my-0 font-weight-normal" style="margin-right: 1rem" th:onclick="|location.href='@{/}'|">WALL-I</h5>
+    <form th:action="@{/logout}" method="post">
+      <button class="w-100 btn btn-dark btn-lg" th:onclick="|location.href='@{/}'|" type="submit">
+        logout
+      </button>
+    </form>
+  </div>
+</div>

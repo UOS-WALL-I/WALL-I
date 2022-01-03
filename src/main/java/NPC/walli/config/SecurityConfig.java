@@ -17,6 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().disable()		//cors방지
                 .csrf().disable()		//csrf방지
                 .formLogin().disable()	//기본 로그인 페이지 없애기
+                .logout().disable()     //기본 로그아웃 페이지 없애기
                 .headers().frameOptions().disable();
     }
 

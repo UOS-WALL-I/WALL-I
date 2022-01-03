@@ -1,6 +1,7 @@
 package NPC.walli.controller;
 
 import NPC.walli.domain.Member;
+import NPC.walli.domain.Role;
 import NPC.walli.service.LoginService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,10 @@ public class LoginController {
 
     @GetMapping("/")
     public String loginForm(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute(SessionConst.LOGIN_MEMBER) != null)
+            return "redirect:/home";
+
         model.addAttribute("loginForm", new LoginForm());
         return "login";
     }
@@ -46,6 +51,9 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
+        if (loginMember.getRole() == Role.Admin)
+            return "redirect:/admin";
+
         if (request.getParameter("redirectURL") != "") {
             String redirectURL = request.getParameter("redirectURL")
                     .substring(request.getParameter("redirectURL").indexOf('=') + 1);
@@ -57,6 +65,7 @@ public class LoginController {
 
     @GetMapping("/home")
     public String home(HttpServletRequest request, HttpServletResponse response) {
+
         return "home";
     }
 
