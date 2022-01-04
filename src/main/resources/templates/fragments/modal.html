@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="modal">
+        <!-- 모달을 열기 위한 버튼 -->
+    <button type="button" class="w-100 btn btn-dark btn-lg" data-toggle="modal" data-target="#myModal">
+            my page
+    </button>
+
+        <!-- 모달 영역 -->
+    <form id="modal-form" onsubmit="return false;">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">비밀번호 확인</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label th:for="password">로그인할 때 입력한 비밀번호를 입력하세요.</label>
+                            <input type="password" class="form-control modal-pwd" required>
+                            <span class="modal-repassword"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary confirm" href="/update">확인</a>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        $('.modal-content').css("background-color", "#000000");
+        $('.confirm').css("display", "none");
+        $('.modal-pwd').on("propertychange change keyup paste input", function () {
+            let password = $('.modal-pwd').val();
+            let data = {password : password};
+
+            $.ajax({
+                type : "post",
+                url : "/update/passwordCheck",
+                data : data,
+                success : function (ret) {
+                    if (ret == "success") {
+                        $('.modal-repassword').text("비밀번호가 일치합니다");
+                        $('.modal-repassword').css("color", "green");
+                        $('.confirm').css("display", "block");
+                    } else {
+                        $('.modal-repassword').text("비밀번호를 다시 입력해주세요");
+                        $('.modal-repassword').css("color", "red");
+                        $('.confirm').css("display", "none");
+                    }
+                }
+            });
+        });
+    </script>
+</div>

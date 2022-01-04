@@ -4,19 +4,18 @@ spring:
     suffix: .html
   data:
     mongodb:
-      uri: mongodb+srv://minchoi:!chl153249@cluster0.gwhle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      uri: mongodb+srv://hynam:gudtlr731@hynam.xjpol.mongodb.net/mydb?retryWrites=true&w=majority
   mail:
     host: smtp.gmail.com
     port: 587
-    username: "asdf6256@gmail.com"
-    password: "cbzqlydgsfnqcjqp"
+    username: "skagudtlr731@gmail.com"
+    password: "pesbkxtsilktqwoo"
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-          socketFactory:
         debug: true
 
   jpa:

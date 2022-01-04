@@ -18,7 +18,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     /**
-     * 회원 가입
+     * 회원 가입 & 수정
      */
     @Transactional
     public ObjectId join(Member member) {
@@ -29,15 +29,15 @@ public class MemberService {
     /**
      * 회원 조회
      */
-    public List<Member> findAll() {
-        return memberRepository.findAll();
-    }
-
-    public List<Member> findByName(String name) {
-        return memberRepository.findByName(name);
-    }
-
     public Member findByEmail(String email) {
         return memberRepository.findByEmail(email).orElse(null);
+    }
+
+    /**
+     * 회원 삭제
+     */
+    @Transactional
+    public void delete(ObjectId objectId) {
+        memberRepository.deleteById(objectId);
     }
 }

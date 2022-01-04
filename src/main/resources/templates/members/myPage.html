@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">User Information</h4>
+
+            <form class="needs-validation" role="form" action="/update" th:object="${memberForm}" method="post">
+                <div class="mb-3">
+                    <label th:for="name">Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Write your name." value="" required>
+                </div>
+
+                <div class="mb-3">
+                    <label th:for="password">Password</label>
+                    <input type="password" th:field="*{password}" class="form-control input-pwd" placeholder="1~0/a~z/A~Z, 8~20 words" required>
+                    <span class="check-password-re"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label th:for="repeatPassword">Re-enter Password </label>
+                    <input type="password" th:field="*{repeatPassword}" class="form-control input-rpwd" placeholder="">
+                    <span class="check-repeat-re"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label th:for="phoneNumber">Phone Number <span class="text-muted">(Optional)</span></label>
+                    <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="010-0000-0000">
+                </div>
+
+                <hr class="mb-4">
+
+                <button class="btn btn-primary btn-lg btn-block update-button" type="submit">수정</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-{{ site.time | date: "%Y" }} Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+</div>
+<script>
+    let passwordCheck = false;
+    let repeatCheck = false;
+
+    $('.input-pwd').blur(function () {
+        let pwd = $('.input-pwd').val();
+        if (pwd.length < 8 || pwd.length > 20) {
+            $('.check-password-re').text("비밀번호의 길이는 8글자 이상 20글자 이하여야 합니다.");
+            $('.check-password-re').css("color", "red");
+        } else {
+            $('.check-password-re').css("display", "none");
+            passwordCheck = true;
+        }
+    });
+
+    $('.input-rpwd').blur(function () {
+        let pwd = $('.input-pwd').val();
+        let rpwd = $('.input-rpwd').val();
+        if (pwd == rpwd) {
+            $('.check-repeat-re').text("비밀번호가 일치합니다.");
+            $('.check-repeat-re').css("color", "green");
+            repeatCheck = true;
+        } else {
+            $('.check-repeat-re').text("비밀번호가 같지 않습니다.");
+            $('.check-repeat-re').css("color", "red");
+        }
+    });
+
+    $('.update-button').click(function (){
+        if (!passwordCheck || !repeatCheck) {
+            return false;
+        }
+    });
+</script>
+</body>
+
+</html>
