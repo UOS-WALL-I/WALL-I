@@ -1,19 +1,19 @@
 package NPC.walli.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.io.InputStream;
 
 @Data
 @Document(collection = "lecture")
-public class Lecture {
+public class Lecture_video {
     @Id
     private Long id;
 
+    private String title;
+
     private String tagging;
 
-    private Binary file;
+    private InputStream stream;
 }

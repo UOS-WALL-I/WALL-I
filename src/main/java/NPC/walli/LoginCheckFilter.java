@@ -42,7 +42,7 @@ public class LoginCheckFilter implements Filter {
                     Enumeration<String> params = request.getParameterNames();
                     while (params.hasMoreElements()) {
                         String name = params.nextElement();
-                        requestURI += name + "=" + URLEncoder.encode(request.getParameter(name), StandardCharsets.UTF_8);
+                        requestURI += name + "=" + URLEncoder.encode(request.getParameter(name), String.valueOf(StandardCharsets.UTF_8));
                     }
 
                     httpResponse.sendRedirect("/?redirectURL=" + requestURI);
