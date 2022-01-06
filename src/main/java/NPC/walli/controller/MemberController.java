@@ -128,4 +128,15 @@ public class MemberController {
         memberService.join(member);
         return "redirect:/home";
     }
+
+    @PostMapping("/delete")
+    public String delete(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Enumeration<String> enumeration = session.getAttributeNames();
+        Member member = (Member) session.getAttribute(enumeration.nextElement() + "");
+        session.invalidate();
+
+        memberService.delete(member.getId());
+        return "redirect:/";
+    }
 }
