@@ -43,7 +43,6 @@
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <form class="delete-form" action="/delete", method="post">
             <div th:replace="fragments/modal :: delete-modal"></div>
-<!--            <button class="btn btn-primary btn-lg btn-block delete-button" type="submit">회원탈퇴</button>-->
         </form>
         <p class="mb-1">&copy; 2017-{{ site.time | date: "%Y" }} Company Name</p>
         <ul class="list-inline">

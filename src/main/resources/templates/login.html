@@ -15,13 +15,13 @@
 <!--        <label for="loginId" class="sr-only">Email address</label>-->
         <input type="text" id="loginId" th:field="*{email}" class="form-control" placeholder="Email address"
                th:errorclass="field-error" autofocus>
-        <div class="field-error" th:errors="*{email}" />
+        <div class="field-error" th:errors="*{email}"></div>
       </div>
       <div class="login-input">
         <!--        <label for="loginId" class="sr-only">Email address</label>-->
         <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="Password"
                th:errorclass="field-error">
-        <div class="field-error" th:errors="*{password}"/>
+        <div class="field-error" th:errors="*{password}"></div>
       </div>
       <input id="redirectURL" th:field="*{redirectURL}" class="visually-hidden"/>
 

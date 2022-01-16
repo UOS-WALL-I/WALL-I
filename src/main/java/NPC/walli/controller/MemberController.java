@@ -87,24 +87,9 @@ public class MemberController {
         }
     }
 
-//    @GetMapping("/update")
-//    public String updateForm(Model model) {
-//        model.addAttribute("memberForm", new MemberForm());
-//        return "/members/myPage";
-//    }
-
     @GetMapping("/update")
-    public String updateForm(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        Enumeration<String> enumeration = session.getAttributeNames();
-        Member member = (Member) session.getAttribute(enumeration.nextElement() + "");
-
-        MemberForm memberForm = new MemberForm();
-
-        memberForm.setName(member.getName());
-        memberForm.setPhoneNumber(member.getPhoneNumber());
-
-        model.addAttribute("memberForm", memberForm);
+    public String updateForm(Model model) {
+        model.addAttribute("memberForm", new MemberForm());
         return "/members/myPage";
     }
 
