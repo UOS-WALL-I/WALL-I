@@ -25,4 +25,6 @@ public class Member {
     private Role role;
 
     private String phoneNumber;
+
+    private List<String> subjectList;
 }
