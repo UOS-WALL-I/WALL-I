@@ -1,18 +1,14 @@
 package NPC.walli.service;
 
 import NPC.walli.domain.Lecture_video;
-import NPC.walli.domain.Member;
-import NPC.walli.repository.MemberRepository;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.client.gridfs.model.GridFSFile;
-import lombok.AllArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.gridfs.GridFsOperations;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,10 +31,6 @@ public class VideoService {
         ObjectId id = gridFsTemplate.store(
                 file.getInputStream(), file.getName(), file.getContentType(), metaData);
         return id.toString();
-    }
-
-    public Member findByEmail(String email) {
-        return memberRepository.findByEmail(email).orElse(null);
     }
 
 
