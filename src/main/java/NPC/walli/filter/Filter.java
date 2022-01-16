@@ -1,4 +1,4 @@
-package NPC.walli;
+package NPC.walli.filter;
 
 import javax.servlet.*;
 import java.io.IOException;

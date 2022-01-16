@@ -12,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.util.Enumeration;
 import java.util.List;
 
 @Slf4j
@@ -69,10 +72,56 @@ public class MemberController {
         return code;
     }
 
-    @GetMapping("/members")
+    @PostMapping("/update/passwordCheck")
     @ResponseBody
-    public List<Member> findByName(@RequestParam("name") String name) {
-        return memberService.findByName(name);
+    public String memberPasswordCheck(HttpServletRequest request, String password) throws Exception {
+        HttpSession session = request.getSession(false);
+        Enumeration<String> enumeration = session.getAttributeNames();
+        Member member = (Member) session.getAttribute(enumeration.nextElement() + "");
+
+        if (passwordEncoder.matches(password, member.getPassword())) {
+            session.setAttribute(SessionConst.UPDATE_MEMBER, member);
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 
+    @GetMapping("/update")
+    public String updateForm(Model model) {
+        model.addAttribute("memberForm", new MemberForm());
+        return "/members/myPage";
+    }
+
+    @PostMapping("/update")
+    public String update(MemberForm form, BindingResult result, HttpServletRequest request) {
+
+        if (result.hasErrors()) {
+            result.reject("update fail","something wrong");
+            return "/members/myPage";
+        }
+
+        HttpSession session = request.getSession(false);
+        Enumeration<String> enumeration = session.getAttributeNames();
+        Member member = (Member) session.getAttribute(enumeration.nextElement() + "");
+
+        member.setName(form.getName());
+        member.setPassword(passwordEncoder.encode(form.getPassword()));
+        member.setPhoneNumber(form.getPhoneNumber());
+        session.removeAttribute(SessionConst.UPDATE_MEMBER);
+
+        memberService.join(member);
+        return "redirect:/home";
+    }
+
+    @PostMapping("/delete")
+    public String delete(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Enumeration<String> enumeration = session.getAttributeNames();
+        Member member = (Member) session.getAttribute(enumeration.nextElement() + "");
+        session.invalidate();
+
+        memberService.delete(member.getId());
+        return "redirect:/";
+    }
 }
