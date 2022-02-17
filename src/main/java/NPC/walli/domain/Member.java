@@ -18,6 +18,8 @@ public class Member {
 
     private String name;
 
+    private String studentId;
+
     private String email;
 
     private String password;

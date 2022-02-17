@@ -40,4 +40,16 @@ public class MemberService {
     public void delete(ObjectId objectId) {
         memberRepository.deleteById(objectId);
     }
+
+    /**
+     * 교수 관련 기능
+     */
+    //
+
+    /**
+     * admin 관련 기능
+     */
+    // 교수 전체 조회
+
+    // 특정 교수 조회
 }
